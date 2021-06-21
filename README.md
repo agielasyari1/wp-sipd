@@ -2,6 +2,11 @@
 Optimasi aplikasi SIPD dengan chrome extension dan plugin wordpress
 Semoga bermanfaat
 
+# Remote repository
+- git fetch upstream
+- git checkout master
+- git merge upstream/master
+
 ### DONASI
 - Donasi untuk pengembang aplikasi, klik di link ini https://smkasiyahhomeschooling.blogspot.com/p/donasi-pengembangan-smk-asiyah.html
 
