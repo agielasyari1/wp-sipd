@@ -1315,7 +1315,7 @@ class Wpsipd_Public
 		global $wpdb;
 		$ret = array(
 			'status'	=> 'success',
-			'message'	=> 'Berhasil set program kegiatan!'
+			'message'	=> 'Berhasil singkron sumber dana!'
 		);
 		if (!empty($_POST)) {
 			if (!empty($_POST['api_key']) && $_POST['api_key'] == carbon_get_theme_option( 'crb_api_key_extension' )) {
@@ -2432,6 +2432,15 @@ class Wpsipd_Public
 			</table>
 		';
 		echo $table;
+	}
+
+	public function monitor_sipd($atts)
+	{
+		// untuk disable render shortcode di halaman edit page/post
+		if(!empty($_GET) && !empty($_GET['post'])){
+			return '';
+		}
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/partials/wpsipd-public-monitor-update.php';
 	}
 
 	public function tampilrka($atts)
