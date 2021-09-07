@@ -1,3 +1,14 @@
+jQuery(document).ready(function(){
+	var loading = ''
+		+'<div id="wrap-loading">'
+	        +'<div class="lds-hourglass"></div>'
+	        +'<div id="persen-loading"></div>'
+	    +'</div>';
+	if(jQuery('#wrap-loading').length == 0){
+		jQuery('body').prepend(loading);
+	}
+});
+
 function run_download_excel(type){
 	var current_url = window.location.href;
 	var body = '<a id="excel" onclick="return false;" href="#" class="button button-primary">DOWNLOAD EXCEL</a>';
@@ -81,11 +92,12 @@ function run_download_excel(type){
 		jQuery(b).attr('style', style+" font-size: 20px;");
 	});
 
-	jQuery('td').map(function(i, b){
-		style = jQuery(b).attr('style');
+	var td = document.getElementsByTagName("td");
+	for(var i=0, l=td.length; i<l; i++){
+		style = td[i].getAttribute('style');
 		if (typeof style == 'undefined'){ style = ''; };
-		jQuery(b).attr('style', style+' mso-number-format:\\@;');
-	});
+		td[i].setAttribute('style', style+'; mso-number-format:\\@;');
+	};
 
 	jQuery('#excel').on('click', function(){
 		var name = "Laporan";
@@ -195,4 +207,54 @@ function tableHtmlToExcel(tableID, filename = ''){
        
         downloadLink.click();
     }
+}
+
+function formatRupiah(angka, prefix){
+	if(!angka || angka == '' || angka <= 0){
+		angka = '0';
+	}
+	try {
+		angka += '';
+		var number_string = angka.replace(/[^,\d]/g, '').toString();
+	}catch(e){
+		console.log('angka', e, angka);
+		var number_string = '0';
+	}
+	var split   		= number_string.split(','),
+	sisa     		= split[0].length % 3,
+	rupiah     		= split[0].substr(0, sisa),
+	ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+	// tambahkan titik jika yang di input sudah menjadi angka ribuan
+	if(ribuan){
+		separator = sisa ? '.' : '';
+		rupiah += separator + ribuan.join('.');
+	}
+
+	rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+	return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+}
+
+function changeUrl(option){
+    var key = option.key;
+    var value = option.value;
+    var _url = option.url;
+    var url_object = new URL(_url);
+    var value_asli = url_object.searchParams.get(key);
+    var _and = '&';
+    if(_url.indexOf('?') == -1){
+    	_url += '?';
+    	_and = '';
+    }
+
+    if(_url.indexOf(key) != -1){
+        _url = _url.replace(_and+key+'='+value_asli, _and+key+'='+value);
+    }else{
+        _url += _and+key+'='+value
+    }
+    return _url;
+}
+
+function onlyNumber(e){
+	if (isNaN(String.fromCharCode(e.which))) e.preventDefault();
 }

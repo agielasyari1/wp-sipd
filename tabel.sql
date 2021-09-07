@@ -1,4 +1,37 @@
 --
+-- Table structure for table `data_catatan_rfk_unit`
+--
+
+CREATE TABLE `data_catatan_rfk_unit` (
+  `id` int(11) NOT NULL,
+  `bulan` tinyint(2) NOT NULL,
+  `catatan_ka_adbang` text NOT NULL,
+  `id_skpd` int(11) NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL,
+  `created_by` text NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_by` text NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Indexes for table `data_catatan_rfk_unit`
+--
+ALTER TABLE `data_catatan_rfk_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `data_catatan_rfk_unit`
+--
+ALTER TABLE `data_catatan_rfk_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+COMMIT;
+
+--
 -- Table structure for table `data_unit`
 --
 CREATE TABLE `data_unit` (
@@ -152,7 +185,7 @@ CREATE TABLE `data_capaian_prog_sub_keg` (
 --
 CREATE TABLE `data_dana_sub_keg` (
   `id` int(11) NOT NULL,
-  `namadana` varchar(50) DEFAULT NULL,
+  `namadana` text DEFAULT NULL,
   `kodedana` varchar(50) DEFAULT NULL,
   `iddana` int(11) DEFAULT NULL,
   `iddanasubbl` int(11) DEFAULT NULL,
@@ -235,71 +268,6 @@ CREATE TABLE `data_ssh_rek_belanja` (
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
 -- 
 --
--- Table structure for table `data_sub_keg_bl`
---
-CREATE TABLE `data_sub_keg_bl` (
-  `id` int(11) NOT NULL,
-  `id_sub_skpd` int(11) NOT NULL,
-  `id_lokasi` int(11) DEFAULT NULL,
-  `id_label_kokab` int(11) NOT NULL,
-  `nama_dana` text,
-  `no_sub_giat` varchar(20) NOT NULL,
-  `kode_giat` varchar(50) NOT NULL,
-  `id_program` int(11) NOT NULL,
-  `nama_lokasi` text DEFAULT NULL,
-  `waktu_akhir` int(11) NOT NULL,
-  `pagu_n_lalu` double(20, 0) DEFAULT NULL,
-  `id_urusan` int(11) NOT NULL,
-  `id_unik_sub_bl` text NOT NULL,
-  `id_sub_giat` int(11) NOT NULL,
-  `label_prov` text,
-  `kode_program` varchar(50) NOT NULL,
-  `kode_sub_giat` varchar(50) NOT NULL,
-  `no_program` varchar(20) NOT NULL,
-  `kode_urusan` varchar(20) NOT NULL,
-  `kode_bidang_urusan` varchar(20) NOT NULL,
-  `nama_program` text NOT NULL,
-  `target_4` text,
-  `target_5` text,
-  `id_bidang_urusan` int(11) DEFAULT NULL,
-  `nama_bidang_urusan` text,
-  `target_3` text,
-  `no_giat` varchar(50) NOT NULL,
-  `id_label_prov` int(11) NOT NULL,
-  `waktu_awal` int(11) NOT NULL,
-  `pagu` double(20, 0) NOT NULL,
-  `output_sub_giat` text,
-  `sasaran` text,
-  `indikator` text,
-  `id_dana` int(11) DEFAULT NULL,
-  `nama_sub_giat` text NOT NULL,
-  `pagu_n_depan` double(20, 0) NOT NULL,
-  `satuan` text,
-  `id_rpjmd` int(11) NOT NULL,
-  `id_giat` int(11) NOT NULL,
-  `id_label_pusat` int(11) NOT NULL,
-  `nama_giat` text NOT NULL,
-  `kode_skpd` varchar(50) NOT NULL,
-  `nama_skpd` text NOT NULL,
-  `kode_sub_skpd` varchar(50) NOT NULL,
-  `id_skpd` int(11) NOT NULL,
-  `id_sub_bl` int(11) DEFAULT NULL,
-  `nama_sub_skpd` text NOT NULL,
-  `target_1` text,
-  `nama_urusan` text NOT NULL,
-  `target_2` text,
-  `label_kokab` text,
-  `label_pusat` text,
-  `pagu_keg` double(20, 0) NOT NULL,
-  `id_bl` int(11) DEFAULT NULL,
-  `kode_bl` varchar(50) NOT NULL,
-  `kode_sbl` varchar(50) NOT NULL,
-  `active` tinyint(4) DEFAULT '1',
-  `update_at` datetime NOT NULL,
-  `tahun_anggaran` year(4) NOT NULL DEFAULT '2021'
-) ENGINE = InnoDB DEFAULT CHARSET = latin1;
--- 
---
 -- Table structure for table `data_sub_keg_indikator`
 --
 CREATE TABLE `data_sub_keg_indikator` (
@@ -321,33 +289,33 @@ CREATE TABLE `data_sub_keg_indikator` (
 --
 CREATE TABLE `data_unit_pagu` (
   `id` int(11) NOT NULL,
-  `batasanpagu` double(20, 0) NOT NULL,
-  `id_daerah` int(11) NOT NULL,
-  `id_level` int(11) NOT NULL,
-  `id_skpd` int(11) NOT NULL,
-  `id_unit` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `is_anggaran` tinyint(4) NOT NULL,
-  `is_deleted` tinyint(4) NOT NULL,
-  `is_komponen` tinyint(4) NOT NULL,
-  `is_locked` smallint(6) NOT NULL,
-  `is_skpd` tinyint(4) NOT NULL,
-  `kode_skpd` varchar(50) NOT NULL,
-  `kunci_bl` tinyint(4) NOT NULL,
-  `kunci_bl_rinci` tinyint(4) NOT NULL,
-  `kuncibl` tinyint(4) NOT NULL,
-  `kunciblrinci` tinyint(4) NOT NULL,
-  `nilaipagu` double(20, 0) NOT NULL,
-  `nilaipagumurni` double(20, 0) NOT NULL,
-  `nilairincian` double(20, 0) NOT NULL,
-  `pagu_giat` double(20, 0) NOT NULL,
-  `realisasi` double(20, 0) NOT NULL,
-  `rinci_giat` double(20, 0) NOT NULL,
-  `set_pagu_giat` double(20, 0) NOT NULL,
-  `set_pagu_skpd` double(20, 0) NOT NULL,
-  `tahun` double(20, 0) NOT NULL,
-  `total_giat` double(20, 0) NOT NULL,
-  `totalgiat` double(20, 0) NOT NULL,
+  `batasanpagu` double(20, 0) DEFAULT NULL,
+  `id_daerah` int(11) DEFAULT NULL,
+  `id_level` int(11) DEFAULT NULL,
+  `id_skpd` int(11) DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `is_anggaran` tinyint(4) DEFAULT NULL,
+  `is_deleted` tinyint(4) DEFAULT NULL,
+  `is_komponen` tinyint(4) DEFAULT NULL,
+  `is_locked` smallint(6) DEFAULT NULL,
+  `is_skpd` tinyint(4) DEFAULT NULL,
+  `kode_skpd` varchar(50) DEFAULT NULL,
+  `kunci_bl` tinyint(4) DEFAULT NULL,
+  `kunci_bl_rinci` tinyint(4) DEFAULT NULL,
+  `kuncibl` tinyint(4) DEFAULT NULL,
+  `kunciblrinci` tinyint(4) DEFAULT NULL,
+  `nilaipagu` double(20, 0) DEFAULT NULL,
+  `nilaipagumurni` double(20, 0) DEFAULT NULL,
+  `nilairincian` double(20, 0) DEFAULT NULL,
+  `pagu_giat` double(20, 0) DEFAULT NULL,
+  `realisasi` double(20, 0) DEFAULT NULL,
+  `rinci_giat` double(20, 0) DEFAULT NULL,
+  `set_pagu_giat` double(20, 0) DEFAULT NULL,
+  `set_pagu_skpd` double(20, 0) DEFAULT NULL,
+  `tahun` year(4) DEFAULT NULL,
+  `total_giat` double(20, 0) DEFAULT NULL,
+  `totalgiat` double(20, 0) DEFAULT NULL,
   `update_at` datetime NOT NULL,
   `tahun_anggaran` year(4) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1;
@@ -544,6 +512,8 @@ CREATE TABLE `data_dewan` (
   `nip` varchar(50) DEFAULT NULL,
   `notelp` varchar(50) DEFAULT NULL,
   `npwp` varchar(50) DEFAULT NULL,
+  `id_sub_skpd` int(11) DEFAULT NULL,
+  `active` tinyint(4) DEFAULT '1',
   `update_at` datetime NOT NULL,
   `tahun_anggaran` year(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -612,13 +582,13 @@ CREATE TABLE `data_sumber_dana` (
 CREATE TABLE `data_user_penatausahaan` (
   `id` int(11) NOT NULL,
   `idSkpd` int(11) DEFAULT NULL,
-  `namaSkpd` text NOT NULL,
+  `namaSkpd` text DEFAULT NULL,
   `kodeSkpd` int(50) DEFAULT NULL,
   `idDaerah` int(11) DEFAULT NULL,
-  `userName` text,
+  `userName` text DEFAULT NULL,
   `nip` varchar(50) DEFAULT NULL,
-  `fullName` text,
-  `nomorHp` int(50) DEFAULT NULL,
+  `fullName` text DEFAULT NULL,
+  `nomorHp` text DEFAULT NULL,
   `rank` varchar(50) DEFAULT NULL,
   `npwp` varchar(50) DEFAULT NULL,
   `idJabatan` int(11) DEFAULT NULL,
@@ -626,10 +596,23 @@ CREATE TABLE `data_user_penatausahaan` (
   `idRole` int(11) DEFAULT NULL,
   `order` int(11) DEFAULT NULL,
   `kpa` varchar(50) DEFAULT NULL,
-  `bank` text,
+  `bank` text DEFAULT NULL,
   `group` varchar(50) DEFAULT NULL,
   `password` varchar(50) DEFAULT NULL,
   `konfirmasiPassword` varchar(50) DEFAULT NULL,
+  `kodeBank` text DEFAULT NULL,
+  `nama_rekening` text DEFAULT NULL,
+  `nomorRekening` text DEFAULT NULL,
+  `pangkatGolongan` text DEFAULT NULL,
+  `tahunPegawai` year(4) DEFAULT NULL,
+  `kodeDaerah` int(11) DEFAULT NULL,
+  `is_from_sipd` int(11) DEFAULT NULL,
+  `is_from_generate` int(11) DEFAULT NULL,
+  `is_from_external` int(11) DEFAULT NULL,
+  `idSubUnit` int(11) DEFAULT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  `idPegawai` int(11) DEFAULT NULL,
+  `alamat` text DEFAULT NULL,
   `tahun` year(4) NOT NULL,
   `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -1192,11 +1175,6 @@ ALTER TABLE `data_ssh_rek_belanja`
 ADD PRIMARY KEY (`id`),
   ADD KEY `id_standar_harga` (`id_standar_harga`);
 --
--- Indexes for table `data_sub_keg_bl`
---
-ALTER TABLE `data_sub_keg_bl`
-ADD PRIMARY KEY (`id`);
---
 -- Indexes for table `data_sub_keg_indikator`
 --
 ALTER TABLE `data_sub_keg_indikator`
@@ -1235,11 +1213,6 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 -- AUTO_INCREMENT for table `data_ssh_rek_belanja`
 --
 ALTER TABLE `data_ssh_rek_belanja`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `data_sub_keg_bl`
---
-ALTER TABLE `data_sub_keg_bl`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `data_sub_keg_indikator`
@@ -1375,3 +1348,541 @@ ALTER TABLE `data_asmas`
 --
 ALTER TABLE `data_pokir`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_user_tapd_sekda` (
+  `id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `created_user` int(11) DEFAULT NULL,
+  `id_daerah` int(11) DEFAULT NULL,
+  `id_skpd` int(11) DEFAULT NULL,
+  `jabatan` text DEFAULT NULL,
+  `nama` text NOT NULL,
+  `nip` double(20,0) NOT NULL,
+  `no_urut` int(11) DEFAULT NULL,
+  `tahun` year(4) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL,
+  `singkron_at` datetime NOT NULL,
+  `active` tinyint(4) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_user_tapd_sekda`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_user_tapd_sekda`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_rfk` (
+  `id` int(11) NOT NULL,
+  `bulan` tinyint(2) NOT NULL,
+  `kode_sbl` text NOT NULL,
+  `rak` double(20,0) DEFAULT NULL,
+  `realisasi_anggaran` double(20,0) DEFAULT NULL,
+  `realisasi_fisik` tinyint(3) DEFAULT NULL,
+  `permasalahan` text DEFAULT NULL,
+  `catatan_verifikator` text DEFAULT NULL,
+  `user_edit` text DEFAULT NULL,
+  `user_verifikator` text DEFAULT NULL,
+  `update_verifikator_at` datetime DEFAULT NULL,
+  `update_fisik_at` datetime DEFAULT NULL,
+  `id_skpd` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_rfk`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_rfk`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_rpjmd_program` (
+  `id` int(11) NOT NULL,
+  `id_misi` int(11) DEFAULT NULL,
+  `id_misi_old` int(11) DEFAULT NULL,
+  `id_program` int(11) DEFAULT NULL,
+  `id_unik` text DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `id_visi` int(11) DEFAULT NULL,
+  `indikator` text DEFAULT NULL,
+  `is_locked` tinyint(4) DEFAULT NULL,
+  `is_locked_indikator` tinyint(4) DEFAULT NULL,
+  `kode_sasaran` text DEFAULT NULL,
+  `kode_skpd` text DEFAULT NULL,
+  `kode_tujuan` text DEFAULT NULL,
+  `misi_teks` text DEFAULT NULL,
+  `nama_program` text DEFAULT NULL,
+  `nama_skpd` text DEFAULT NULL,
+  `pagu_1` double(20,0) DEFAULT NULL,
+  `pagu_2` double(20,0) DEFAULT NULL,
+  `pagu_3` double(20,0) DEFAULT NULL,
+  `pagu_4` double(20,0) DEFAULT NULL,
+  `pagu_5` double(20,0) DEFAULT NULL,
+  `program_lock` tinyint(4) DEFAULT NULL,
+  `sasaran_lock` tinyint(4) DEFAULT NULL,
+  `sasaran_teks` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_lock` tinyint(4) DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_misi` int(11) DEFAULT NULL,
+  `urut_sasaran` int(11) DEFAULT NULL,
+  `urut_tujuan` int(11) DEFAULT NULL,
+  `visi_teks` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_rpjmd_program`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_rpjmd_program`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_rpjmd_sasaran` (
+  `id` int(11) NOT NULL,
+  `id_misi` int(11) DEFAULT NULL,
+  `id_misi_old` int(11) DEFAULT NULL,
+  `id_sasaran` int(11) DEFAULT NULL,
+  `id_unik` text DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_visi` int(11) DEFAULT NULL,
+  `indikator_teks` text DEFAULT NULL,
+  `is_locked` tinyint(4) DEFAULT NULL,
+  `is_locked_indikator` tinyint(4) DEFAULT NULL,
+  `kode_tujuan` text DEFAULT NULL,
+  `misi_teks` text DEFAULT NULL,
+  `sasaran_teks` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_lock` tinyint(4) DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_misi` int(11) DEFAULT NULL,
+  `urut_sasaran` int(11) DEFAULT NULL,
+  `urut_tujuan` int(11) DEFAULT NULL,
+  `visi_teks` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_rpjmd_sasaran`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_rpjmd_sasaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_rpjmd_tujuan` (
+  `id` int(11) NOT NULL,
+  `id_misi` int(11) DEFAULT NULL,
+  `id_misi_old` int(11) DEFAULT NULL,
+  `id_tujuan` int(11) DEFAULT NULL,
+  `id_unik` text DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_visi` int(11) DEFAULT NULL,
+  `indikator_teks` text DEFAULT NULL,
+  `is_locked` tinyint(4) DEFAULT NULL,
+  `is_locked_indikator` tinyint(4) DEFAULT NULL,
+  `misi_lock` tinyint(4) DEFAULT NULL,
+  `misi_teks` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_misi` int(11) DEFAULT NULL,
+  `urut_tujuan` int(11) DEFAULT NULL,
+  `visi_teks` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_rpjmd_tujuan`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_rpjmd_tujuan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_sub_keg_bl` (
+  `id` int(11) NOT NULL,
+  `id_sub_skpd` int(11) NOT NULL,
+  `id_lokasi` int(11) DEFAULT NULL,
+  `id_label_kokab` int(11) NOT NULL,
+  `nama_dana` text,
+  `no_sub_giat` varchar(20) NOT NULL,
+  `kode_giat` varchar(50) NOT NULL,
+  `id_program` int(11) NOT NULL,
+  `nama_lokasi` text DEFAULT NULL,
+  `waktu_akhir` int(11) NOT NULL,
+  `pagu_n_lalu` double(20, 0) DEFAULT NULL,
+  `id_urusan` int(11) NOT NULL,
+  `id_unik_sub_bl` text NOT NULL,
+  `id_sub_giat` int(11) NOT NULL,
+  `label_prov` text,
+  `kode_program` varchar(50) NOT NULL,
+  `kode_sub_giat` varchar(50) NOT NULL,
+  `no_program` varchar(20) NOT NULL,
+  `kode_urusan` varchar(20) NOT NULL,
+  `kode_bidang_urusan` varchar(20) NOT NULL,
+  `nama_program` text NOT NULL,
+  `target_4` text,
+  `target_5` text,
+  `id_bidang_urusan` int(11) DEFAULT NULL,
+  `nama_bidang_urusan` text,
+  `target_3` text,
+  `no_giat` varchar(50) NOT NULL,
+  `id_label_prov` int(11) NOT NULL,
+  `waktu_awal` int(11) NOT NULL,
+  `pagumurni` double(20, 0) DEFAULT NULL,
+  `pagu` double(20, 0) NOT NULL,
+  `pagu_simda` double(20, 0) DEFAULT NULL,
+  `output_sub_giat` text,
+  `sasaran` text,
+  `indikator` text,
+  `id_dana` int(11) DEFAULT NULL,
+  `nama_sub_giat` text NOT NULL,
+  `pagu_n_depan` double(20, 0) NOT NULL,
+  `satuan` text,
+  `id_rpjmd` int(11) NOT NULL,
+  `id_giat` int(11) NOT NULL,
+  `id_label_pusat` int(11) NOT NULL,
+  `nama_giat` text NOT NULL,
+  `kode_skpd` varchar(50) NOT NULL,
+  `nama_skpd` text NOT NULL,
+  `kode_sub_skpd` varchar(50) NOT NULL,
+  `id_skpd` int(11) NOT NULL,
+  `id_sub_bl` int(11) DEFAULT NULL,
+  `nama_sub_skpd` text NOT NULL,
+  `target_1` text,
+  `nama_urusan` text NOT NULL,
+  `target_2` text,
+  `label_kokab` text,
+  `label_pusat` text,
+  `pagu_keg` double(20, 0) NOT NULL,
+  `id_bl` int(11) DEFAULT NULL,
+  `kode_bl` varchar(50) NOT NULL,
+  `kode_sbl` varchar(50) NOT NULL,
+  `active` tinyint(4) DEFAULT '1',
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL DEFAULT '2021'
+) ENGINE = InnoDB DEFAULT CHARSET = latin1;
+ALTER TABLE `data_sub_keg_bl`
+ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_sub_keg_bl`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_mapping_sumberdana` (
+  `id` int(11) NOT NULL,
+  `id_rinci_sub_bl` int(11) NOT NULL,
+  `id_sumber_dana` int(11) NOT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_mapping_sumberdana`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_mapping_sumberdana`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_label_komponen` (
+  `id` int(11) NOT NULL,
+  `nama` text DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `id_skpd` int(11) DEFAULT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_label_komponen`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_label_komponen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_mapping_label` (
+  `id` int(11) NOT NULL,
+  `id_rinci_sub_bl` int(11) NOT NULL,
+  `id_label_komponen` int(11) NOT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_mapping_label`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_mapping_label`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_renstra_tujuan` (
+  `id` int(11) NOT NULL,
+  `bidur_lock` int(11) DEFAULT NULL,
+  `id_bidang_urusan` int(11) DEFAULT NULL,
+  `id_unik` text DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `indikator_teks` text DEFAULT NULL,
+  `is_locked` tinyint(4) DEFAULT NULL,
+  `is_locked_indikator` tinyint(4) DEFAULT NULL,
+  `kode_bidang_urusan` text DEFAULT NULL,
+  `kode_skpd` text DEFAULT NULL,
+  `nama_bidang_urusan` text DEFAULT NULL,
+  `nama_skpd` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_tujuan` int(11) DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_renstra_tujuan`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_renstra_tujuan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_renstra_sasaran` (
+  `id` int(11) NOT NULL,
+  `bidur_lock` int(11) DEFAULT NULL,
+  `id_bidang_urusan` int(11) DEFAULT NULL,
+  `id_misi` int(11) DEFAULT NULL,
+  `id_unik` int(11) DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_unit` text DEFAULT NULL,
+  `id_visi` int(11) DEFAULT NULL,
+  `indikator_teks` text DEFAULT NULL,
+  `is_locked` int(11) DEFAULT NULL,
+  `is_locked_indikator` int(11) DEFAULT NULL,
+  `kode_bidang_urusan` text DEFAULT NULL,
+  `kode_skpd` text DEFAULT NULL,
+  `kode_tujuan` text DEFAULT NULL,
+  `nama_bidang_urusan` text DEFAULT NULL,
+  `nama_skpd` text DEFAULT NULL,
+  `sasaran_teks` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_lock` tinyint(4) DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_sasaran` tinyint(4) DEFAULT NULL,
+  `urut_tujuan` tinyint(4) DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_renstra_sasaran`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_renstra_sasaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_renstra_program` (
+  `id` int(11) NOT NULL,
+  `bidur_lock` int(11) DEFAULT NULL,
+  `id_bidang_urusan` int(11) DEFAULT NULL,
+  `id_misi` int(11) DEFAULT NULL,
+  `id_program` int(11) DEFAULT NULL,
+  `id_unik` text DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `id_visi` int(11) DEFAULT NULL,
+  `indikator` text DEFAULT NULL,
+  `is_locked` tinyint(4) DEFAULT NULL,
+  `is_locked_indikator` tinyint(4) DEFAULT NULL,
+  `kode_bidang_urusan` text DEFAULT NULL,
+  `kode_program` text DEFAULT NULL,
+  `kode_sasaran` text DEFAULT NULL,
+  `kode_skpd` text DEFAULT NULL,
+  `kode_tujuan` text DEFAULT NULL,
+  `nama_bidang_urusan` text DEFAULT NULL,
+  `nama_program` text DEFAULT NULL,
+  `nama_skpd` text DEFAULT NULL,
+  `pagu_1` int(11) DEFAULT NULL,
+  `pagu_2` int(11) DEFAULT NULL,
+  `pagu_3` int(11) DEFAULT NULL,
+  `pagu_4` int(11) DEFAULT NULL,
+  `pagu_5` int(11) DEFAULT NULL,
+  `program_lock` tinyint(4) DEFAULT NULL,
+  `sasaran_lock` tinyint(4) DEFAULT NULL,
+  `sasaran_teks` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_lock` int(11) DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_sasaran` tinyint(4) DEFAULT NULL,
+  `urut_tujuan` tinyint(4) DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_renstra_program`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_renstra_program`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_renstra_kegiatan` (
+  `id` int(11) NOT NULL,
+  `bidur_lock` tinyint(4) DEFAULT NULL,
+  `giat_lock` tinyint(4) DEFAULT NULL,
+  `id_bidang_urusan` int(11) DEFAULT NULL,
+  `id_giat` int(11) DEFAULT NULL,
+  `id_misi` int(11) DEFAULT NULL,
+  `id_program` int(11) DEFAULT NULL,
+  `id_unik` text DEFAULT NULL,
+  `id_unik_indikator` text DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `id_visi` int(11) DEFAULT NULL,
+  `indikator` text DEFAULT NULL,
+  `is_locked` tinyint(4) DEFAULT NULL,
+  `is_locked_indikator` tinyint(4) DEFAULT NULL,
+  `kode_bidang_urusan` text DEFAULT NULL,
+  `kode_giat` text DEFAULT NULL,
+  `kode_program` text DEFAULT NULL,
+  `kode_sasaran` text DEFAULT NULL,
+  `kode_skpd` text DEFAULT NULL,
+  `kode_tujuan` text DEFAULT NULL,
+  `kode_unik_program` text DEFAULT NULL,
+  `nama_bidang_urusan` text DEFAULT NULL,
+  `nama_giat` text DEFAULT NULL,
+  `nama_program` text DEFAULT NULL,
+  `nama_skpd` text DEFAULT NULL,
+  `pagu_1` text DEFAULT NULL,
+  `pagu_2` text DEFAULT NULL,
+  `pagu_3` text DEFAULT NULL,
+  `pagu_4` text DEFAULT NULL,
+  `pagu_5` text DEFAULT NULL,
+  `program_lock` tinyint(4) DEFAULT NULL,
+  `renstra_prog_lock` tinyint(4) DEFAULT NULL,
+  `sasaran_lock` tinyint(4) DEFAULT NULL,
+  `sasaran_teks` text DEFAULT NULL,
+  `satuan` text DEFAULT NULL,
+  `status` text DEFAULT NULL,
+  `target_1` text DEFAULT NULL,
+  `target_2` text DEFAULT NULL,
+  `target_3` text DEFAULT NULL,
+  `target_4` text DEFAULT NULL,
+  `target_5` text DEFAULT NULL,
+  `target_akhir` text DEFAULT NULL,
+  `target_awal` text DEFAULT NULL,
+  `tujuan_lock` tinyint(4) DEFAULT NULL,
+  `tujuan_teks` text DEFAULT NULL,
+  `urut_sasaran` tinyint(4) DEFAULT NULL,
+  `urut_tujuan` tinyint(4) DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_renstra_kegiatan`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_renstra_kegiatan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_realisasi_akun` (
+  `id` int(11) NOT NULL,
+  `realisasi` double(20, 0) DEFAULT NULL,
+  `rak` double(20, 0) DEFAULT NULL,
+  `kode_akun` text DEFAULT NULL,
+  `kode_sbl` text DEFAULT NULL,
+  `id_skpd` int(11) DEFAULT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_realisasi_akun`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_realisasi_akun`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_realisasi_rincian` (
+  `id` int(11) NOT NULL,
+  `id_rinci_sub_bl` int(11) NOT NULL,
+  `realisasi` double(20,0) DEFAULT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_realisasi_rincian`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_realisasi_rincian`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_realisasi_renja` (
+  `id` int(11) NOT NULL,
+  `id_indikator` int(11) DEFAULT NULL,
+  `tipe_indikator` tinyint(4) DEFAULT NULL,
+  `id_rumus_indikator` int(11) DEFAULT NULL,
+  `kode_sbl` text DEFAULT NULL,
+  `realisasi_bulan_1` int(11) DEFAULT NULL,
+  `realisasi_bulan_2` int(11) DEFAULT NULL,
+  `realisasi_bulan_3` int(11) DEFAULT NULL,
+  `realisasi_bulan_4` int(11) DEFAULT NULL,
+  `realisasi_bulan_5` int(11) DEFAULT NULL,
+  `realisasi_bulan_6` int(11) DEFAULT NULL,
+  `realisasi_bulan_7` int(11) DEFAULT NULL,
+  `realisasi_bulan_8` int(11) DEFAULT NULL,
+  `realisasi_bulan_9` int(11) DEFAULT NULL,
+  `realisasi_bulan_10` int(11) DEFAULT NULL,
+  `realisasi_bulan_11` int(11) DEFAULT NULL,
+  `realisasi_bulan_12` int(11) DEFAULT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_realisasi_renja`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_realisasi_renja`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+CREATE TABLE `data_rumus_indikator` (
+  `id` int(11) NOT NULL,
+  `rumus` text DEFAULT NULL,
+  `keterangan` text DEFAULT NULL,
+  `user` text DEFAULT NULL,
+  `active` tinyint(4) NOT NULL,
+  `update_at` datetime NOT NULL,
+  `tahun_anggaran` year(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ALTER TABLE `data_rumus_indikator`
+  ADD PRIMARY KEY (`id`);
+ALTER TABLE `data_rumus_indikator`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+INSERT INTO `data_rumus_indikator` (`id`, `rumus`, `keterangan`, `user`, `active`, `update_at`, `tahun_anggaran`) VALUES
+(1, 'Indikator Tren Positif', 'Indikator Tren Positif adalah jenis indikator yang semakin tinggi realisasi maka dianggap semakin baik. Rumus capaian target = Realisasi/Target * 100. Rumus total target triwulan = akumulasi dari semua triwulan.', NULL, 1, '2021-08-23 00:00:00', 2021),
+(2, 'Indikator Tren Negatif', 'Indikator Tren Negatif adalah jenis indikator yang semakin rendah realisasi maka dianggap semakin baik. Contoh : Angka Stunting. Rumus capaian target : Target/Realisasi * 100. Total triwulan = realisasi triwulan terakhir.', NULL, 1, '2021-08-23 00:00:00', 2021),
+(3, 'Indikator Jenis Persentase', 'Indikator Jenis Persentase adalah jenis indikator berupa persentase. Pengisian realisasi target per bulan diisi sama atau lebih besar dari bulan sebelumnya. Rumus capaian target = Realisasi/Target * 100. Rumus total target triwulan = realisasi triwulan terakhir.', NULL, 1, '2021-08-23 00:00:00', 2021);

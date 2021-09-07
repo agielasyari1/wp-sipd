@@ -58,6 +58,8 @@ class Wpsipd
 	 */
 	protected $version;
 
+	protected $simda;
+
 	/**
 	 * Define the core functionality of the plugin.
 	 *
@@ -124,6 +126,10 @@ class Wpsipd
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-wpsipd-public.php';
 
+		// Untuk SCRIPT SIMDA
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-wpsipd-simda.php';
+
+		$this->simda = new Wpsipd_Simda( $this->plugin_name, $this->version );
 		$this->loader = new Wpsipd_Loader();
 	}
 
@@ -154,12 +160,19 @@ class Wpsipd
 	private function define_admin_hooks()
 	{
 
-		$plugin_admin = new Wpsipd_Admin($this->get_plugin_name(), $this->get_version());
+		$plugin_admin = new Wpsipd_Admin($this->get_plugin_name(), $this->get_version(), $this->simda);
 
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
 		$this->loader->add_action('carbon_fields_register_fields', $plugin_admin, 'crb_attach_sipd_options');
 		$this->loader->add_action('template_redirect', $plugin_admin, 'allow_access_private_post', 0);
+		$this->loader->add_filter('carbon_fields_should_save_field_value', $plugin_admin, 'crb_edit_save', 10, 3);
+
+		$this->loader->add_action('wp_ajax_get_label_komponen',  $plugin_admin, 'get_label_komponen');
+		$this->loader->add_action('wp_ajax_simpan_data_label_komponen',  $plugin_admin, 'simpan_data_label_komponen');
+		$this->loader->add_action('wp_ajax_hapus_data_label_komponen',  $plugin_admin, 'hapus_data_label_komponen');
+		$this->loader->add_action('wp_ajax_simpan_mapping',  $plugin_admin, 'simpan_mapping');
+		$this->loader->add_action('wp_ajax_load_ajax_carbon',  $plugin_admin, 'load_ajax_carbon');
 	}
 
 	/**
@@ -172,7 +185,7 @@ class Wpsipd
 	private function define_public_hooks()
 	{
 
-		$plugin_public = new Wpsipd_Public($this->get_plugin_name(), $this->get_version());
+		$plugin_public = new Wpsipd_Public($this->get_plugin_name(), $this->get_version(), $this->simda);
 
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
@@ -270,12 +283,59 @@ class Wpsipd
 		$this->loader->add_action('wp_ajax_update_nonactive_sub_bl_kas',  $plugin_public, 'update_nonactive_sub_bl_kas');
 		$this->loader->add_action('wp_ajax_nopriv_update_nonactive_sub_bl_kas',  $plugin_public, 'update_nonactive_sub_bl_kas');
 
+		$this->loader->add_action('wp_ajax_singkron_pendahuluan',  $plugin_public, 'singkron_pendahuluan');
+		$this->loader->add_action('wp_ajax_nopriv_singkron_pendahuluan',  $plugin_public, 'singkron_pendahuluan');
+
+		$this->loader->add_action('wp_ajax_non_active_user',  $plugin_public, 'non_active_user');
+		$this->loader->add_action('wp_ajax_nopriv_non_active_user',  $plugin_public, 'non_active_user');
+
+		$this->loader->add_action('wp_ajax_get_mapping',  $plugin_public, 'get_mapping');
+		$this->loader->add_action('wp_ajax_nopriv_get_mapping',  $plugin_public, 'get_mapping');
+
+		$this->loader->add_action('wp_ajax_generate_user_sipd_merah',  $plugin_public, 'generate_user_sipd_merah');
+		$this->loader->add_action('wp_ajax_nopriv_generate_user_sipd_merah',  $plugin_public, 'generate_user_sipd_merah');
+
+		$this->loader->add_action('wp_ajax_singkron_renstra_tujuan',  $plugin_public, 'singkron_renstra_tujuan');
+		$this->loader->add_action('wp_ajax_nopriv_singkron_renstra_tujuan',  $plugin_public, 'singkron_renstra_tujuan');
+
+		$this->loader->add_action('wp_ajax_singkron_renstra_sasaran',  $plugin_public, 'singkron_renstra_sasaran');
+		$this->loader->add_action('wp_ajax_nopriv_singkron_renstra_sasaran',  $plugin_public, 'singkron_renstra_sasaran');
+
+		$this->loader->add_action('wp_ajax_singkron_renstra_program',  $plugin_public, 'singkron_renstra_program');
+		$this->loader->add_action('wp_ajax_nopriv_singkron_renstra_program',  $plugin_public, 'singkron_renstra_program');
+
+		$this->loader->add_action('wp_ajax_singkron_renstra_kegiatan',  $plugin_public, 'singkron_renstra_kegiatan');
+		$this->loader->add_action('wp_ajax_nopriv_singkron_renstra_kegiatan',  $plugin_public, 'singkron_renstra_kegiatan');
+
+		$this->loader->add_action('wp_ajax_get_realisasi_akun',  $plugin_public, 'get_realisasi_akun');
+		$this->loader->add_action('wp_ajax_nopriv_get_realisasi_akun',  $plugin_public, 'get_realisasi_akun');
+
+		$this->loader->add_action('wp_ajax_get_url_page',  $plugin_public, 'get_url_page');
+		$this->loader->add_action('wp_ajax_nopriv_get_url_page',  $plugin_public, 'get_url_page');
+
+		$this->loader->add_action('wp_ajax_save_monev_renja',  $plugin_public, 'save_monev_renja');
+		$this->loader->add_action('wp_ajax_nopriv_save_monev_renja',  $plugin_public, 'save_monev_renja');
+
+		$this->loader->add_action('wp_ajax_simpan_rfk',  $plugin_public, 'simpan_rfk');
+		$this->loader->add_action('wp_ajax_reset_rfk',  $plugin_public, 'reset_rfk');
+		$this->loader->add_action('wp_ajax_get_monev',  $plugin_public, 'get_monev');
+		
+		$this->loader->add_action('wp_ajax_simpan_catatan_rfk_unit',  $plugin_public, 'simpan_catatan_rfk_unit');
+
+		add_shortcode('menu_monev',  array($plugin_public, 'menu_monev'));
 		add_shortcode('datassh', array($plugin_public, 'datassh'));
 		add_shortcode('rekbelanja', array($plugin_public, 'rekbelanja'));
 		add_shortcode('tampilrka', array($plugin_public, 'tampilrka'));
 		add_shortcode('tampilrkpd', array($plugin_public, 'tampilrkpd'));
 		add_shortcode('apbdpenjabaran', array($plugin_public, 'apbdpenjabaran'));
 		add_shortcode('monitor_sipd', array($plugin_public, 'monitor_sipd'));
+		add_shortcode('monitor_rfk', array($plugin_public, 'monitor_rfk'));
+		add_shortcode('monitor_monev_renja', array($plugin_public, 'monitor_monev_renja'));
+		add_shortcode('monitor_sumber_dana', array($plugin_public, 'monitor_sumber_dana'));
+		add_shortcode('monitor_label_komponen', array($plugin_public, 'monitor_label_komponen'));
+		add_shortcode('monitor_daftar_sumber_dana', array($plugin_public, 'monitor_daftar_sumber_dana'));
+		add_shortcode('monitor_daftar_label_komponen', array($plugin_public, 'monitor_daftar_label_komponen'));
+		add_shortcode('monitor_monev_renstra', array($plugin_public, 'monitor_monev_renstra'));
 	}
 
 	/**
